@@ -1,6 +1,11 @@
 package com.example.demo;
 
+import javax.persistence.*;
+
+@Entity(name = "Student")
 public class Student {
+
+    @Id
     private Long id;
     private String firstName;
     private String lastName;
