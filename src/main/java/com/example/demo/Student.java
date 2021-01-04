@@ -2,10 +2,21 @@ package com.example.demo;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.*;
+
 @Entity(name = "Student")
 public class Student {
 
     @Id
+    @SequenceGenerator(
+            name = "student_sequence",
+            sequenceName = "student_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "student_sequence"
+    )
     private Long id;
     private String firstName;
     private String lastName;
