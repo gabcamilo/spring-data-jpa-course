@@ -34,22 +34,23 @@ public class StudentIdCard {
     @Column(
             name = "card_number",
             nullable = false,
-            columnDefinition = "TEXT"
+            length = 15
     )
     private String cardNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
-            name = "student_id",
-            referencedColumnName = "id"
+            name = "student_id", //from student_id_card
+            referencedColumnName = "id" //from student
     )
     private Student student;
 
     public StudentIdCard() {
     }
 
-    public StudentIdCard(String cardNumber) {
+    public StudentIdCard(String cardNumber, Student student) {
         this.cardNumber = cardNumber;
+        this.student = student;
     }
 
     public Long getId() {
