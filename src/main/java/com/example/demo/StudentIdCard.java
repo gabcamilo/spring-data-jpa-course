@@ -41,7 +41,8 @@ public class StudentIdCard {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "student_id", //from student_id_card
-            referencedColumnName = "id" //from student
+            referencedColumnName = "id", //from student
+            foreignKey = @ForeignKey(name = "student_id_fk")
     )
     private Student student;
 
