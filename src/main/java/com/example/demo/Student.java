@@ -166,6 +166,21 @@ public class Student {
         }
     }
 
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void enrollToCourse(Course course) {
+        courses.add(course);
+        course.getStudents().add(this);
+    }
+
+    public void unEnrollToCourse(Course course) {
+        courses.remove(course);
+        course.getStudents().remove(this);
+    }
+
+
     @Override
     public String toString() {
         return "Student{" +
