@@ -2,6 +2,9 @@ package com.example.demo;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static javax.persistence.GenerationType.*;
 
 @Entity(name = "Student")
@@ -58,9 +61,20 @@ public class Student {
 
     @OneToOne(
             mappedBy = "student",
-            orphanRemoval = true
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
     )
     private StudentIdCard studentIdCard;
+
+    @OneToMany(
+            mappedBy = "student",
+            orphanRemoval = true,
+            cascade = {
+                    CascadeType.PERSIST, // whenever we have a book if it's no saved it'll persist
+                    CascadeType.REMOVE // whenever we delete it'll delete all children, in this case the actual books
+            }
+    )
+    private List<Book> books = new ArrayList<>();
 
     public Student(String firstName,
                    String lastName,
@@ -114,6 +128,21 @@ public class Student {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    //bidirectional relationship
+    public void addBook(Book book) {
+        if (!books.contains(book)) {
+            books.add(book);
+            book.setStudent(this);
+        }
+    }
+
+    public void removeBook(Book book) {
+        if (this.books.contains(book)){
+            this.books.remove((book));
+            book.setStudent(null);
+        }
     }
 
     @Override
