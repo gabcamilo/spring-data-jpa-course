@@ -6,12 +6,13 @@ import java.time.LocalDateTime;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-@Entity(name = "book")
+@Entity(name = "Book")
+@Table(name = "book")
 public class Book {
 
     @Id
     @SequenceGenerator(
-            name = "book_id_sequence",
+            name = "book_sequence",
             sequenceName = "book_sequence",
             allocationSize = 1
     )
