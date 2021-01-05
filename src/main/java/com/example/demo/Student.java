@@ -76,6 +76,27 @@ public class Student {
     )
     private List<Book> books = new ArrayList<>();
 
+    // A student can enroll to zero or more courses
+    @ManyToMany(
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.REMOVE
+            }
+    )
+    @JoinTable( //this annotation creates the enrollment table
+            name = "enrollment",
+            joinColumns = @JoinColumn(
+                    name = "student_id",
+                    foreignKey = @ForeignKey(name = "enrollment_student_id_fk")
+            ),
+            //adding the same for course_id
+            inverseJoinColumns = @JoinColumn(
+                    name = "course_id",
+                    foreignKey = @ForeignKey(name = "enrollment_course_id_fk")
+            )
+    )
+    private List<Course> courses = new ArrayList<>();
+
     public Student(String firstName,
                    String lastName,
                    String email,

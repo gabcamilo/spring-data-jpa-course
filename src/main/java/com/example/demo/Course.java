@@ -2,9 +2,12 @@ package com.example.demo;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
-@Entity(name = "course")
+@Entity(name = "Course")
 @Table(name = "course")
 public class Course {
 
@@ -37,6 +40,11 @@ public class Course {
             columnDefinition = "TEXT"
     )
     private String department;
+
+    @ManyToMany(
+            mappedBy = "courses" //"courses" from the Student entity
+    )
+    private List<Student> students = new ArrayList<>();
 
     public Course() {
     }
