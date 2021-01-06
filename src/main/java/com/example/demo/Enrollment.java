@@ -11,13 +11,19 @@ public class Enrollment {
 
     @ManyToOne
     @MapsId("studentId")
-    @JoinColumn(name = "student_id") //this is the actual property in the database
+    @JoinColumn(
+            name = "student_id", //this is the actual property in the database
+            foreignKey = @ForeignKey(name = "student_enrollment_fk")
+    )
     private Student student;
 
 
     @ManyToOne
     @MapsId("courseId")
-    @JoinColumn(name = "course_id")
+    @JoinColumn(
+            name = "course_id",
+            foreignKey = @ForeignKey(name = "course_enrollment_fk")
+    )
     private Course course;
 
     public Enrollment() {
