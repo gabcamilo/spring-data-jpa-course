@@ -140,6 +140,14 @@ public class Student {
         this.age = age;
     }
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setStudentIdCard(StudentIdCard studentIdCard) {
+        this.studentIdCard = studentIdCard;
+    }
+
     //bidirectional relationship
     public void addBook(Book book) {
         if (!books.contains(book)) {
